@@ -35,8 +35,7 @@ public class SinkFrame extends javax.swing.JFrame {
         parameters = importParameters.getParameters();
 
         world = new World( parameters);
-        cSink = new CanvasSink(world);
-        canvasPanel.add(cSink);
+        
 
     }
 
@@ -51,7 +50,6 @@ public class SinkFrame extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         canvasPanel = new javax.swing.JPanel();
-        canvas1 = new java.awt.Canvas();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         StartMenuItem = new javax.swing.JMenuItem();
@@ -80,17 +78,11 @@ public class SinkFrame extends javax.swing.JFrame {
         canvasPanel.setLayout(canvasPanelLayout);
         canvasPanelLayout.setHorizontalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(canvasPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(990, 990, 990))
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         canvasPanelLayout.setVerticalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(canvasPanelLayout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(647, Short.MAX_VALUE))
+            .addGap(0, 798, Short.MAX_VALUE)
         );
 
         getContentPane().add(canvasPanel);
@@ -175,10 +167,12 @@ public class SinkFrame extends javax.swing.JFrame {
 
     private void StartMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartMenuItemActionPerformed
         world = new World(parameters);
-        cSink = new CanvasSink(world);
+       cSink = new CanvasSink(world);
+        canvasPanel.add(cSink);
         for(int i = 0; i < parameters.cicles; i++){
             if(!pauseMenuItem.isSelected()){
                 world.cicle();
+                cSink.repaint();
             }
         }
     }//GEN-LAST:event_StartMenuItemActionPerformed
@@ -187,9 +181,44 @@ public class SinkFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
+
+   /* public boolean update_world()
+				{
+					Mark = 0;
+
+					if(pause==false){
+						//If cicle >= maxim number of cicles, simulation is stopped with Mark = 1
+						if(cicle >= this.max_cicle){
+								this.Mark= 1;
+								fwr.Close(); //Close the "excel" file
+								//Menu-buttons sensitive
+								this.NewSimulation.Sensitive = true;
+								this.StopSimulation.Sensitive = false;
+								this.PauseSimulation.Sensitive= false;
+						}else{
+							//New cicle starts
+							this.cicle++;
+							this.world_start.cicle();
+
+							//Dates of "the world"
+							float population = this.world_start.get_population();
+							float density = this.world_start.get_density();
+							float proximity = this.world_start.get_proximity();
+
+							//Write the statusbar
+							this.statusbar1.Push(1, "Cicle: "+this.cicle.ToString() +"            Population: "+population.ToString()+"    Density: "+density.ToString()+"     Neighborhood: "+proximity.ToString());
+
+							//Write the "exel" file every cicle
+							string info = (this.cicle).ToString()+";"+population.ToString()+";"+density.ToString()+";"+proximity.ToString();
+							fwr.WriteLine(info);
+						}
+						this.drawingarea1.QueueDraw();
+					}
+					return false;
+				}*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem StartMenuItem;
-    private java.awt.Canvas canvas1;
     private javax.swing.JPanel canvasPanel;
     private javax.swing.JMenuItem configuratioMenuItem;
     private javax.swing.JMenuItem exitMenuItem;

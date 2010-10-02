@@ -23,10 +23,10 @@ package sinkjava;
  * @author sandra
  */
 public class Parameters {
-    public int x, y;
     public int cicles;
     public int population;
     public int mortality;
     public int patch;
+    public int size;
     public int var1, var2, var3, var4;
 }

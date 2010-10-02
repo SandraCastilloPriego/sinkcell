@@ -38,8 +38,8 @@ public class World {
 
     public World(Parameters parameters) {
 
-        this.x_axis = parameters.x;
-        this.y_axis = parameters.y;
+        this.x_axis = parameters.size;
+        this.y_axis = parameters.size;
         this.parameters = parameters;
         this.cellsState = new int[this.x_axis][this.y_axis];        
         this.proximity = new int[this.x_axis][this.y_axis];
