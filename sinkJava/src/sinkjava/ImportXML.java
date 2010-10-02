@@ -36,19 +36,24 @@ public class ImportXML extends DefaultHandler {
     private StringBuffer charBuffer;
     private Parameters parameters;
 
-    public ImportXML(String fileName) {
+    public ImportXML() {
         // Use the default (non-validating) parser
+
+
         parameters = new Parameters();
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
-            File originalFile = new File(fileName);
+
+            File originalFile = new File(new java.io.File("").getAbsolutePath()
+                    + "/config.xml");
 
             if ((!originalFile.exists()) || (!originalFile.canRead())) {
                 throw new SAXException(
                         "Parsing Cancelled, file does not exist or is not readable");
             }
 
-            FileInputStream fis = new FileInputStream(fileName);
+            FileInputStream fis = new FileInputStream(new java.io.File("").getAbsolutePath()
+                    + "/config.xml");
             InputStream finalStream = fis;
 
             charBuffer = new StringBuffer();
@@ -80,12 +85,12 @@ public class ImportXML extends DefaultHandler {
     public void endElement(String namespaceURI, String sName, // simple name
             String qName // qualified name
             ) throws SAXException {
-        
+
         if (qName.equals("size")) {
             try {
                 parameters.size = Integer.valueOf(getTextOfElement());
             } catch (Exception exception) {
-                parameters.size = 1000;
+                parameters.size = 100;
             }
         }
 
@@ -117,7 +122,7 @@ public class ImportXML extends DefaultHandler {
                 parameters.patch = 40;
             }
         }
-       
+
         if (qName.equals("var1")) {
             try {
                 parameters.var1 = Integer.valueOf(getTextOfElement());

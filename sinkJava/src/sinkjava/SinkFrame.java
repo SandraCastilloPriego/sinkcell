@@ -36,7 +36,7 @@ public class SinkFrame extends javax.swing.JFrame {
 
     /** Creates new form sinkFrame */
     public SinkFrame() {
-        ImportXML importParameters = new ImportXML("/home/bicha/Escritorio/config.xml");
+        ImportXML importParameters = new ImportXML();
         parameters = importParameters.getParameters();
         config = new Configuration(parameters);
         initComponents();
@@ -208,9 +208,7 @@ public class SinkFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void configuratioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuratioMenuItemActionPerformed
-        // TODO add your handling code here:
-
-        config.setVisible(true);
+       config.setVisible(true);
     }//GEN-LAST:event_configuratioMenuItemActionPerformed
 
     private void StartMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartMenuItemActionPerformed
@@ -280,6 +278,7 @@ public class SinkFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        new ExportXML(parameters);
         this.dispose();
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
