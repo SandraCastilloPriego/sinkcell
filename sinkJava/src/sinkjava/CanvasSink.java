@@ -20,7 +20,6 @@ package sinkjava;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Event;
 import java.awt.Graphics;
 
 /**
@@ -40,101 +39,33 @@ public class CanvasSink extends Canvas {
         this.setSize(h, w);
         this.setBackground(Color.white);
     }
-
-    /**
-     * protected virtual void OnDrawingarea1ExposeEvent(object o, Gtk.ExposeEventArgs args)
-    {
-    Gtk.Widget DrawingArea = (Gtk.Widget)o;
-    Gdk.Color color =  new Gdk.Color((byte)255,(byte)255,(byte)255);
-    this.gc = new Gdk.GC(DrawingArea.GdkWindow);
-    this.gc.RgbFgColor = color;
-    DrawingArea.GdkWindow.DrawRectangle(this.gc,true,
-    0,
-    0,
-    this.limit*2,
-    this.limit*2);
-
-    //If the simulation isn't stopped (Mark = 0):
-    if(Mark == 0){
-    int[,] population = this.world_start.get_population_array();
-    int[,] habitat = this.world_start.get_habitat_array();
-
-    for (int x = 0; x < this.Size; x++) {
-    for (int y = 0; y < this.Size; y++) {
-    int n_x = ((this.limit*x)/this.Size);
-    int n_y = ((this.limit*y)/this.Size);
-    if(habitat[x,y] == 1)
-    {
-    color = new Gdk.Color((byte)0,(byte)255,(byte)0);
-    this.gc.RgbFgColor = color;
-    DrawingArea.GdkWindow.DrawRectangle(this.gc,true,
-    n_x,
-    n_y,
-    this.limit/this.Size,
-    this.limit/this.Size);
-
-    color = new Gdk.Color((byte)0,(byte)0,(byte)0);
-    this.gc.RgbFgColor = color;
-    DrawingArea.GdkWindow.DrawRectangle(this.gc,false,
-    n_x,
-    n_y,
-    this.limit/this.Size,
-    this.limit/this.Size);x
-    }
-    if(population[x,y] == 1){
-    color = new Gdk.Color((byte)255,(byte)0,(byte)0);
-    this.gc.RgbFgColor = color;
-    DrawingArea.GdkWindow.DrawRectangle(this.gc,true,
-    n_x,
-    n_y,
-    (this.limit/this.Size)-1,
-    (this.limit/this.Size)-1);
-    }
-    }
-    }
-    update_world();
-    }
-    }
-
-     * @param g
-     */
+    
+    @Override
     public void paint(Graphics g) {
         int[][] population = this.world.getPopulationArray();
         int[][] habitat = this.world.getHabitatArray();
 
-        int xSize = this.world.getParameters().x;
-        int ySize = this.world.getParameters().y;
-        for (int x = 0; x < xSize; x++) {
-            for (int y = 0; y < ySize; y++) {
-                int n_x = ((this.w * x) / xSize);
-                int n_y = ((this.h * y) / ySize);
+        int size = this.world.getParameters().size;
+
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                int n_x = ((this.w * x) / size);
+                int n_y = ((this.h * y) / size);
                 if (habitat[x][y] == 1) {
                     g.setColor(Color.black);
-                    g.drawRect(n_x, n_y, this.w / xSize, this.h / ySize);
+                    g.drawRect(n_x, n_y, this.w / size, this.h / size);
                     g.setColor(Color.GREEN);
-                    g.fillRect(n_x, n_y, this.w / xSize, this.h / ySize);
+                    g.fillRect(n_x, n_y, this.w / size, this.h / size);
+                }
+
+                if (population[x][y] == 1) {
+                    g.setColor(Color.red);
+                    g.fillRect(n_x, n_y, (this.w / size) - 1, (this.h / size) - 1);
                 }
             }
-        }
-        /*color = new Gdk.Color((byte)0,(byte)0,(byte)0);
-        this.gc.RgbFgColor = color;
-        DrawingArea.GdkWindow.DrawRectangle(this.gc,false,
-        n_x,
-        n_y,
-        this.limit/this.Size,
-        this.limit/this.Size);
-        }*/
-        //  g.setColor(Color.blue);
-        //  g.fillRect(0, 0, w, h);
+        } 
     }
-
-    public boolean mouseDown(Event evt, int x, int y) {
-        if (x < w && y < h) {
-            System.out.println("Raton en Canvas: (" + x + "," + y + ")");
-            return true;
-        }
-        return false;
-    }
+   
 }
 
 

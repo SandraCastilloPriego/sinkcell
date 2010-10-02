@@ -80,18 +80,12 @@ public class ImportXML extends DefaultHandler {
     public void endElement(String namespaceURI, String sName, // simple name
             String qName // qualified name
             ) throws SAXException {
-        if (qName.equals("X")) {
+        
+        if (qName.equals("size")) {
             try {
-                parameters.x = Integer.valueOf(getTextOfElement());
+                parameters.size = Integer.valueOf(getTextOfElement());
             } catch (Exception exception) {
-                parameters.x = 1000;
-            }
-        }
-        if (qName.equals("Y")) {
-            try {
-                parameters.y = Integer.valueOf(getTextOfElement());
-            } catch (Exception exception) {
-                parameters.y = 1000;
+                parameters.size = 1000;
             }
         }
 

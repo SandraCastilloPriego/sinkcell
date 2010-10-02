@@ -59,11 +59,8 @@ public class Configuration extends javax.swing.JDialog {
         patchSlider.setValue(parameters.patch);
         patchTF.setText(String.valueOf(parameters.patch));
 
-        XSlider.setValue(parameters.x);
-        XTF.setText(String.valueOf(parameters.x));
-
-        YSlider.setValue(parameters.y);
-        YTF.setText(String.valueOf(parameters.y));
+        sizeSlider.setValue(parameters.size);
+        sizeTF.setText(String.valueOf(parameters.size));
 
         var1.setValue(parameters.var1);
         var2.setValue(parameters.var2);
@@ -85,16 +82,6 @@ public class Configuration extends javax.swing.JDialog {
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        XSlider = new javax.swing.JSlider();
-        XTF = new javax.swing.JTextField();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        YSlider = new javax.swing.JSlider();
-        YTF = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -112,6 +99,10 @@ public class Configuration extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         patchSlider = new javax.swing.JSlider();
         patchTF = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        sizeSlider = new javax.swing.JSlider();
+        sizeTF = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -177,94 +168,6 @@ public class Configuration extends javax.swing.JDialog {
         add(jPanel2, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-
-        jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("World size"));
-        jPanel18.setLayout(new javax.swing.BoxLayout(jPanel18, javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel17.setMinimumSize(new java.awt.Dimension(400, 63));
-        jPanel17.setPreferredSize(new java.awt.Dimension(400, 67));
-        jPanel17.setLayout(new java.awt.GridBagLayout());
-
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("X");
-        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel15.setMaximumSize(new java.awt.Dimension(67, 15));
-        jLabel15.setMinimumSize(new java.awt.Dimension(67, 15));
-        jLabel15.setPreferredSize(new java.awt.Dimension(67, 15));
-        jPanel17.add(jLabel15, new java.awt.GridBagConstraints());
-
-        XSlider.setMajorTickSpacing(1000);
-        XSlider.setMaximum(1000);
-        XSlider.setMinorTickSpacing(100);
-        XSlider.setPaintTicks(true);
-        XSlider.setMinimumSize(new java.awt.Dimension(250, 63));
-        XSlider.setPreferredSize(new java.awt.Dimension(250, 67));
-        XSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                XSliderStateChanged(evt);
-            }
-        });
-        jPanel17.add(XSlider, new java.awt.GridBagConstraints());
-
-        XTF.setMinimumSize(new java.awt.Dimension(60, 25));
-        XTF.setPreferredSize(new java.awt.Dimension(60, 25));
-        XTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                XTFActionPerformed(evt);
-            }
-        });
-        jPanel17.add(XTF, new java.awt.GridBagConstraints());
-
-        jPanel18.add(jPanel17);
-
-        jPanel16.setMinimumSize(new java.awt.Dimension(400, 63));
-        jPanel16.setPreferredSize(new java.awt.Dimension(400, 67));
-        jPanel16.setLayout(new java.awt.GridBagLayout());
-
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Y");
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabel14.setMaximumSize(new java.awt.Dimension(67, 15));
-        jLabel14.setMinimumSize(new java.awt.Dimension(67, 15));
-        jLabel14.setPreferredSize(new java.awt.Dimension(67, 15));
-        jPanel16.add(jLabel14, new java.awt.GridBagConstraints());
-
-        YSlider.setMajorTickSpacing(1000);
-        YSlider.setMaximum(1000);
-        YSlider.setMinorTickSpacing(100);
-        YSlider.setPaintTicks(true);
-        YSlider.setMinimumSize(new java.awt.Dimension(250, 63));
-        YSlider.setPreferredSize(new java.awt.Dimension(250, 67));
-        YSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                YSliderStateChanged(evt);
-            }
-        });
-        jPanel16.add(YSlider, new java.awt.GridBagConstraints());
-
-        YTF.setMinimumSize(new java.awt.Dimension(60, 25));
-        YTF.setPreferredSize(new java.awt.Dimension(60, 25));
-        YTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YTFActionPerformed(evt);
-            }
-        });
-        jPanel16.add(YTF, new java.awt.GridBagConstraints());
-
-        jPanel18.add(jPanel16);
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        jTabbedPane1.addTab("World", jPanel15);
 
         jPanel1.setLayout(new java.awt.GridLayout(5, 1));
 
@@ -402,6 +305,39 @@ public class Configuration extends javax.swing.JDialog {
 
         jPanel1.add(jPanel7);
 
+        jPanel8.setOpaque(false);
+        jPanel8.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Size");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel5.setPreferredSize(new java.awt.Dimension(67, 15));
+        jPanel8.add(jLabel5, new java.awt.GridBagConstraints());
+
+        sizeSlider.setMajorTickSpacing(1000);
+        sizeSlider.setMaximum(1000);
+        sizeSlider.setMinorTickSpacing(100);
+        sizeSlider.setPaintTicks(true);
+        sizeSlider.setMinimumSize(new java.awt.Dimension(250, 48));
+        sizeSlider.setPreferredSize(new java.awt.Dimension(250, 52));
+        sizeSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sizeSliderStateChanged(evt);
+            }
+        });
+        jPanel8.add(sizeSlider, new java.awt.GridBagConstraints());
+
+        sizeTF.setMinimumSize(new java.awt.Dimension(60, 25));
+        sizeTF.setPreferredSize(new java.awt.Dimension(60, 25));
+        sizeTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sizeTFActionPerformed(evt);
+            }
+        });
+        jPanel8.add(sizeTF, new java.awt.GridBagConstraints());
+
+        jPanel1.add(jPanel8);
+
         jTabbedPane1.addTab("General Configuration", jPanel1);
 
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.PAGE_AXIS));
@@ -486,105 +422,15 @@ public class Configuration extends javax.swing.JDialog {
         add(jTabbedPane1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ciclesSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ciclesSliderStateChanged
-        int value = ciclesSlider.getValue();
-        ciclesTF.setText(String.valueOf(value));
-    }//GEN-LAST:event_ciclesSliderStateChanged
-
-    private void ciclesTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciclesTFActionPerformed
-        String value = ciclesTF.getText();
-        try {
-            int intValue = Integer.parseInt(value);
-            ciclesSlider.setValue(intValue);
-        } catch (Exception e) {
-            System.out.println("The number format is not correct");
-        }
-    }//GEN-LAST:event_ciclesTFActionPerformed
-
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void populationTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_populationTFActionPerformed
-        String value = populationTF.getText();
-        try {
-            int intValue = Integer.parseInt(value);
-            populationSlider.setValue(intValue);
-        } catch (Exception e) {
-            System.out.println("The number format is not correct");
-        }
-    }//GEN-LAST:event_populationTFActionPerformed
-
-    private void mortalitySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mortalitySliderStateChanged
-        int value = mortalitySlider.getValue();
-        mortalityTF.setText(String.valueOf(value));
-    }//GEN-LAST:event_mortalitySliderStateChanged
-
-    private void mortalityTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mortalityTFActionPerformed
-        String value = mortalityTF.getText();
-        try {
-            int intValue = Integer.parseInt(value);
-            mortalitySlider.setValue(intValue);
-        } catch (Exception e) {
-            System.out.println("The number format is not correct");
-        }
-    }//GEN-LAST:event_mortalityTFActionPerformed
-
-    private void patchSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_patchSliderStateChanged
-        int value = patchSlider.getValue();
-        patchTF.setText(String.valueOf(value));
-    }//GEN-LAST:event_patchSliderStateChanged
-
-    private void patchTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patchTFActionPerformed
-        String value = patchTF.getText();
-        try {
-            int intValue = Integer.parseInt(value);
-            patchSlider.setValue(intValue);
-        } catch (Exception e) {
-            System.out.println("The number format is not correct");
-        }
-    }//GEN-LAST:event_patchTFActionPerformed
-
-    private void populationSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_populationSliderStateChanged
-        int value = populationSlider.getValue();
-        populationTF.setText(String.valueOf(value));
-    }//GEN-LAST:event_populationSliderStateChanged
-
-    private void YSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_YSliderStateChanged
-        int value = YSlider.getValue();
-        YTF.setText(String.valueOf(value));
-    }//GEN-LAST:event_YSliderStateChanged
-
-    private void YTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YTFActionPerformed
-        String value = YTF.getText();
-        try {
-            int intValue = Integer.parseInt(value);
-            YSlider.setValue(intValue);
-        } catch (Exception e) {
-            System.out.println("The number format is not correct");
-        }
-    }//GEN-LAST:event_YTFActionPerformed
-
-    private void XSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_XSliderStateChanged
-        int value = XSlider.getValue();
-        XTF.setText(String.valueOf(value));
-    }//GEN-LAST:event_XSliderStateChanged
-
-    private void XTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XTFActionPerformed
-        String value = XTF.getText();
-        try {
-            int intValue = Integer.parseInt(value);
-            XSlider.setValue(intValue);
-        } catch (Exception e) {
-            System.out.println("The number format is not correct");
-        }
-    }//GEN-LAST:event_XTFActionPerformed
-
-    public int getStatus(){
+    public int getStatus() {
         return status;
     }
 
-    public Parameters getParameters(){
+    public Parameters getParameters() {
         return this.parameters;
     }
 
@@ -593,8 +439,7 @@ public class Configuration extends javax.swing.JDialog {
         parameters.mortality = this.mortalitySlider.getValue();
         parameters.patch = this.patchSlider.getValue();
         parameters.population = this.populationSlider.getValue();
-        parameters.x = this.XSlider.getValue();
-        parameters.y = this.YSlider.getValue();
+        parameters.size = this.sizeSlider.getValue();
         parameters.var1 = this.var1.getValue();
         parameters.var2 = this.var2.getValue();
         parameters.var3 = this.var3.getValue();
@@ -604,11 +449,83 @@ public class Configuration extends javax.swing.JDialog {
 
         setVisible(false);
     }//GEN-LAST:event_okButtonActionPerformed
+
+    private void sizeTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizeTFActionPerformed
+        String value = sizeTF.getText();
+        try {
+            int intValue = Integer.parseInt(value);
+            sizeSlider.setValue(intValue);
+        } catch (Exception e) {
+            System.out.println("The number format is not correct");
+        }
+}//GEN-LAST:event_sizeTFActionPerformed
+
+    private void sizeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sizeSliderStateChanged
+        int value = sizeSlider.getValue();
+        sizeTF.setText(String.valueOf(value));
+
+}//GEN-LAST:event_sizeSliderStateChanged
+
+    private void patchTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patchTFActionPerformed
+        String value = patchTF.getText();
+        try {
+            int intValue = Integer.parseInt(value);
+            patchSlider.setValue(intValue);
+        } catch (Exception e) {
+            System.out.println("The number format is not correct");
+        }
+}//GEN-LAST:event_patchTFActionPerformed
+
+    private void patchSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_patchSliderStateChanged
+        int value = patchSlider.getValue();
+        patchTF.setText(String.valueOf(value));
+}//GEN-LAST:event_patchSliderStateChanged
+
+    private void mortalityTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mortalityTFActionPerformed
+        String value = mortalityTF.getText();
+        try {
+            int intValue = Integer.parseInt(value);
+            mortalitySlider.setValue(intValue);
+        } catch (Exception e) {
+            System.out.println("The number format is not correct");
+        }
+}//GEN-LAST:event_mortalityTFActionPerformed
+
+    private void mortalitySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mortalitySliderStateChanged
+        int value = mortalitySlider.getValue();
+        mortalityTF.setText(String.valueOf(value));
+}//GEN-LAST:event_mortalitySliderStateChanged
+
+    private void populationTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_populationTFActionPerformed
+        String value = populationTF.getText();
+        try {
+            int intValue = Integer.parseInt(value);
+            populationSlider.setValue(intValue);
+        } catch (Exception e) {
+            System.out.println("The number format is not correct");
+        }
+}//GEN-LAST:event_populationTFActionPerformed
+
+    private void populationSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_populationSliderStateChanged
+        int value = populationSlider.getValue();
+        populationTF.setText(String.valueOf(value));
+}//GEN-LAST:event_populationSliderStateChanged
+
+    private void ciclesTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciclesTFActionPerformed
+        String value = ciclesTF.getText();
+        try {
+            int intValue = Integer.parseInt(value);
+            ciclesSlider.setValue(intValue);
+        } catch (Exception e) {
+            System.out.println("The number format is not correct");
+        }
+}//GEN-LAST:event_ciclesTFActionPerformed
+
+    private void ciclesSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ciclesSliderStateChanged
+        int value = ciclesSlider.getValue();
+        ciclesTF.setText(String.valueOf(value));
+}//GEN-LAST:event_ciclesSliderStateChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSlider XSlider;
-    private javax.swing.JTextField XTF;
-    private javax.swing.JSlider YSlider;
-    private javax.swing.JTextField YTF;
     private javax.swing.JButton cancelButton;
     private javax.swing.JSlider ciclesSlider;
     private javax.swing.JTextField ciclesTF;
@@ -617,11 +534,10 @@ public class Configuration extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -632,16 +548,13 @@ public class Configuration extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JSlider mortalitySlider;
@@ -651,6 +564,8 @@ public class Configuration extends javax.swing.JDialog {
     private javax.swing.JTextField patchTF;
     private javax.swing.JSlider populationSlider;
     private javax.swing.JTextField populationTF;
+    private javax.swing.JSlider sizeSlider;
+    private javax.swing.JTextField sizeTF;
     private javax.swing.JSlider var1;
     private javax.swing.JSlider var2;
     private javax.swing.JSlider var3;
