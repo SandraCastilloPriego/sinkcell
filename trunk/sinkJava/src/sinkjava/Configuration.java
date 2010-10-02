@@ -314,8 +314,8 @@ public class Configuration extends javax.swing.JDialog {
         jLabel5.setPreferredSize(new java.awt.Dimension(67, 15));
         jPanel8.add(jLabel5, new java.awt.GridBagConstraints());
 
-        sizeSlider.setMajorTickSpacing(600);
-        sizeSlider.setMaximum(600);
+        sizeSlider.setMajorTickSpacing(500);
+        sizeSlider.setMaximum(500);
         sizeSlider.setMinorTickSpacing(100);
         sizeSlider.setPaintTicks(true);
         sizeSlider.setMinimumSize(new java.awt.Dimension(250, 48));

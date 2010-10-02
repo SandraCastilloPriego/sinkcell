@@ -31,6 +31,8 @@ public class SinkFrame extends javax.swing.JFrame {
     Configuration config;
     World world;
     CanvasSink cSink;
+    sinkThread thread;
+    boolean stopSignal = false;
 
     /** Creates new form sinkFrame */
     public SinkFrame() {
@@ -51,6 +53,10 @@ public class SinkFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
+        labelBar = new javax.swing.JLabel();
+        labelBar1 = new javax.swing.JLabel();
+        labelBar2 = new javax.swing.JLabel();
+        labelBar3 = new javax.swing.JLabel();
         canvasPanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -71,8 +77,29 @@ public class SinkFrame extends javax.swing.JFrame {
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
         jToolBar1.setRollover(true);
-        jToolBar1.setMinimumSize(new java.awt.Dimension(400, 20));
-        jToolBar1.setPreferredSize(new java.awt.Dimension(400, 20));
+        jToolBar1.setMinimumSize(new java.awt.Dimension(600, 20));
+        jToolBar1.setPreferredSize(new java.awt.Dimension(600, 20));
+
+        labelBar.setMaximumSize(new java.awt.Dimension(160, 50));
+        labelBar.setMinimumSize(new java.awt.Dimension(100, 50));
+        labelBar.setPreferredSize(new java.awt.Dimension(100, 50));
+        jToolBar1.add(labelBar);
+
+        labelBar1.setMaximumSize(new java.awt.Dimension(160, 50));
+        labelBar1.setMinimumSize(new java.awt.Dimension(100, 50));
+        labelBar1.setPreferredSize(new java.awt.Dimension(100, 50));
+        jToolBar1.add(labelBar1);
+
+        labelBar2.setMaximumSize(new java.awt.Dimension(160, 50));
+        labelBar2.setMinimumSize(new java.awt.Dimension(100, 50));
+        labelBar2.setPreferredSize(new java.awt.Dimension(100, 50));
+        jToolBar1.add(labelBar2);
+
+        labelBar3.setMaximumSize(new java.awt.Dimension(160, 50));
+        labelBar3.setMinimumSize(new java.awt.Dimension(100, 50));
+        labelBar3.setPreferredSize(new java.awt.Dimension(100, 50));
+        jToolBar1.add(labelBar3);
+
         jPanel1.add(jToolBar1);
 
         canvasPanel.setMinimumSize(new java.awt.Dimension(600, 600));
@@ -113,6 +140,11 @@ public class SinkFrame extends javax.swing.JFrame {
         stopMenuItem.setMnemonic('O');
         stopMenuItem.setText("Stop Simulation");
         stopMenuItem.setToolTipText("Stops simulation.");
+        stopMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopMenuItemActionPerformed(evt);
+            }
+        });
         jMenu1.add(stopMenuItem);
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -151,11 +183,21 @@ public class SinkFrame extends javax.swing.JFrame {
         jMenuItem2.setMnemonic('H');
         jMenuItem2.setText("Help");
         jMenuItem2.setToolTipText("Sink help");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem2);
 
         jMenuItem3.setMnemonic('A');
         jMenuItem3.setText("About us");
         jMenuItem3.setToolTipText("About us");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
 
         jMenuBar1.add(jMenu3);
@@ -172,13 +214,14 @@ public class SinkFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_configuratioMenuItemActionPerformed
 
     private void StartMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartMenuItemActionPerformed
+        stopSignal = false;
         canvasPanel.removeAll();
         parameters = config.getParameters();
         world = new World(parameters);
         world.init();
         cSink = new CanvasSink(world, parameters);
         canvasPanel.add(cSink);
-        sinkThread thread = new sinkThread(cSink, parameters.cicles);
+        thread = new sinkThread(cSink, parameters.cicles);
         thread.start();
         this.validate();
     }//GEN-LAST:event_StartMenuItemActionPerformed
@@ -191,58 +234,55 @@ public class SinkFrame extends javax.swing.JFrame {
         @Override
         public void run() {
             for (int i = 0; i < parameters.cicles; i++) {
-                if (!pauseMenuItem.isSelected()) { 
-                   cSink.update(cSink.getGraphics());
+                if(stopSignal){
+                    break;
+                }
+                if (!pauseMenuItem.isSelected()) {
+                    cSink.update(cSink.getGraphics());
+                    int population = world.getPopulation();
+                    float density = world.getDensity();
+                    float proximity = world.getProximity(); 
+
+
+                    labelBar.setText("Iteration n = " + i);
+                    labelBar1.setText( " Population = " + population);
+                    labelBar2.setText(" Density = " + density);
+                    labelBar3.setText(" Proximity = "+ proximity);
                     try {
-                        //cSink.repaint();
-                        this.sleep(200);
+                        sleep(300);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(SinkFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+                    world.cicle();
+                } else {
+                    cSink.repaint();
+                    i--;
                 }
             }
 
         }
     }
 
+    private void stopMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopMenuItemActionPerformed
+        this.canvasPanel.removeAll();
+        this.stopSignal = true;
+        this.validate();
+    }//GEN-LAST:event_stopMenuItemActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Help help = new Help(this, false);
+        help.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        About about = new About(this,false);
+        about.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         this.dispose();
     }//GEN-LAST:event_exitMenuItemActionPerformed
-    /* public boolean update_world()
-    {
-    Mark = 0;
 
-    if(pause==false){
-    //If cicle >= maxim number of cicles, simulation is stopped with Mark = 1
-    if(cicle >= this.max_cicle){
-    this.Mark= 1;
-    fwr.Close(); //Close the "excel" file
-    //Menu-buttons sensitive
-    this.NewSimulation.Sensitive = true;
-    this.StopSimulation.Sensitive = false;
-    this.PauseSimulation.Sensitive= false;
-    }else{
-    //New cicle starts
-    this.cicle++;
-    this.world_start.cicle();
-
-    //Dates of "the world"
-    float population = this.world_start.get_population();
-    float density = this.world_start.get_density();
-    float proximity = this.world_start.get_proximity();
-
-    //Write the statusbar
-    this.statusbar1.Push(1, "Cicle: "+this.cicle.ToString() +"            Population: "+population.ToString()+"    Density: "+density.ToString()+"     Neighborhood: "+proximity.ToString());
-
-    //Write the "exel" file every cicle
-    string info = (this.cicle).ToString()+";"+population.ToString()+";"+density.ToString()+";"+proximity.ToString();
-    fwr.WriteLine(info);
-    }
-    this.drawingarea1.QueueDraw();
-    }
-    return false;
-    }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem StartMenuItem;
     private javax.swing.JPanel canvasPanel;
@@ -257,6 +297,10 @@ public class SinkFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel labelBar;
+    private javax.swing.JLabel labelBar1;
+    private javax.swing.JLabel labelBar2;
+    private javax.swing.JLabel labelBar3;
     private javax.swing.JCheckBoxMenuItem pauseMenuItem;
     private javax.swing.JMenuItem stopMenuItem;
     // End of variables declaration//GEN-END:variables
