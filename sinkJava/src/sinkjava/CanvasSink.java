@@ -21,9 +21,7 @@ package sinkjava;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
 
 /**
  *
@@ -38,81 +36,51 @@ public class CanvasSink extends Canvas {
     Image offscreen = null;
 
     public CanvasSink(World world, Parameters parameters) {
-        canvasSize = 600;
+        canvasSize = 600 ;
         this.parameters = parameters;
         this.world = world;
         this.setSize(canvasSize, canvasSize);
         this.setBackground(Color.white);
     }
 
-    /* @Override
-    public Graphics getGraphics(){
-    return offgc;
-    }*/
     @Override
     public void update(Graphics g) {
-        offscreen = createImage(canvasSize, canvasSize);
-        offgc = offscreen.getGraphics();
-        //offgc = g;
+        try {
+            offscreen = createImage(canvasSize, canvasSize);
+            offgc = offscreen.getGraphics();
 
-        int[][] population = this.world.getPopulationArray();
-        int[][] habitat = this.world.getHabitatArray();
+            int[][] population = this.world.getPopulationArray();
+            int[][] habitat = this.world.getHabitatArray();
 
-        int size = parameters.size;
+            int size = parameters.size;
 
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                int n_x = ((this.canvasSize * x) / size);
-                int n_y = ((this.canvasSize * y) / size);
-                if (habitat[x][y] == 1) {
-                   // offgc.setColor(Color.black);
-                   // offgc.drawRect(n_x, n_y, this.canvasSize / size, this.canvasSize / size);
-                    offgc.setColor(Color.GREEN);
-                    offgc.fillRect(n_x, n_y, this.canvasSize / size, this.canvasSize / size);
+            for (int x = 0; x < size - 1; x++) {
+                for (int y = 0; y < size - 1; y++) {
+                    int n_x = ((this.canvasSize * x) / size);
+                    int n_y = ((this.canvasSize * y) / size);
+                  //  System.out.println(x + " - " + y);
+                    if (habitat[x][y] == 1) {
+                        offgc.setColor(Color.black);
+                        offgc.drawRect(n_x, n_y, (this.canvasSize / size) - 2, (this.canvasSize / size) - 2);
+                        offgc.setColor(Color.GREEN);
+                        offgc.fillRect(n_x, n_y, this.canvasSize / size, this.canvasSize / size);
+                    }
+
+                    if (population[x][y] == 1) {
+                        offgc.setColor(Color.red);
+                        offgc.fillRect(n_x, n_y, (this.canvasSize / size) - 1, (this.canvasSize / size) - 1);
+                    }
                 }
-
-                if (population[x][y] == 1) {
-                    offgc.setColor(Color.red);
-                    offgc.fillRect(n_x, n_y, (this.canvasSize / size) - 1, (this.canvasSize / size) - 1);
-                }
-            }
+            }           
+            // transfer offscreen to window
+            g.drawImage(offscreen, 0, 0, this);
+     
+        } catch (Exception e) {
         }
-      //  paint(offgc);
-        // transfer offscreen to window
-        g.drawImage(offscreen, 0, 0, this);
-
-        world.cicle();
-
 
     }
 
-    /* @Override
-    public void paint(Graphics g) {
-
-    world.cicle();
-    int[][] population = this.world.getPopulationArray();
-    int[][] habitat = this.world.getHabitatArray();
-
-    int size = parameters.size;
-
-    for (int x = 0; x < size; x++) {
-    for (int y = 0; y < size; y++) {
-    int n_x = ((this.canvasSize * x) / size);
-    int n_y = ((this.canvasSize * y) / size);
-    if (habitat[x][y] == 1) {
-    g.setColor(Color.black);
-    g.drawRect(n_x, n_y, this.canvasSize / size, this.canvasSize / size);
-    g.setColor(Color.GREEN);
-    g.fillRect(n_x, n_y, this.canvasSize / size, this.canvasSize / size);
-    }
-
-    if (population[x][y] == 1) {
-    g.setColor(Color.red);
-    g.fillRect(n_x, n_y, (this.canvasSize / size) - 1, (this.canvasSize / size) - 1);
-    }
-    }
-    }
-    }*/
+   
 }
 
 

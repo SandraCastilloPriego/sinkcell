@@ -38,12 +38,21 @@ public class World {
 
     public World(Parameters parameters) {
 
-        this.x_axis = parameters.size;
-        this.y_axis = parameters.size;
+        this.x_axis = parameters.size+1;
+        this.y_axis = parameters.size+1;
         this.parameters = parameters;
-        this.cellsState = new int[this.x_axis][this.y_axis];        
-        this.proximity = new int[this.x_axis][this.y_axis];
-        this.habitat = new int[this.x_axis][this.y_axis];
+        this.cellsState = new int[this.x_axis][];
+        for(int i = 0; i < this.x_axis; i++){
+            this.cellsState[i] = new int[this.y_axis];
+        }
+        this.proximity = new int[this.x_axis][];
+        for(int i = 0; i < this.x_axis; i++){
+            this.proximity[i] = new int[this.y_axis];
+        }
+        this.habitat = new int[this.x_axis][];
+        for(int i = 0; i < this.x_axis; i++){
+            this.habitat[i] = new int[this.y_axis];
+        }
 
         for (int i = 0; i < this.x_axis; i++) {
             for (int e = 0; e < this.y_axis; e++) {
@@ -141,8 +150,8 @@ public class World {
         this.update();
     }
 
-    public float getPopulation() {
-        float locaPopulation = 0;
+    public int getPopulation() {
+        int locaPopulation = 0;
         for (int x = 0; x < this.x_axis; x++) {
             for (int y = 0; y < this.y_axis; y++) {
                 locaPopulation += this.cellsState[x][y];
@@ -152,12 +161,12 @@ public class World {
     }
 
     public float getDensity() {
-        float density = this.getPopulation() / (this.x_axis * this.y_axis);
+        float density = (float)this.getPopulation() / (this.x_axis * this.y_axis);
         return density;
     }
 
     public float getProximity() {
-        float localProximity = this.getPopulation() / ((this.x_axis * this.y_axis) / 8);
+        float localProximity = (float)this.getPopulation() / ((this.x_axis * this.y_axis) / 8);
         return localProximity;
     }
 

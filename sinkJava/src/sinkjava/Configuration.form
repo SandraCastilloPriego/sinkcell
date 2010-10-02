@@ -405,8 +405,8 @@
                 </Component>
                 <Component class="javax.swing.JSlider" name="sizeSlider">
                   <Properties>
-                    <Property name="majorTickSpacing" type="int" value="600"/>
-                    <Property name="maximum" type="int" value="600"/>
+                    <Property name="majorTickSpacing" type="int" value="500"/>
+                    <Property name="maximum" type="int" value="500"/>
                     <Property name="minorTickSpacing" type="int" value="100"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
