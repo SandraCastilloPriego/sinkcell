@@ -187,6 +187,11 @@ public class SinkFrame extends javax.swing.JFrame {
         jMenu2.add(configuratioMenuItem);
 
         saveFileMenuItem.setText("Export CSV file");
+        saveFileMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveFileMenuItemActionPerformed(evt);
+            }
+        });
         jMenu2.add(saveFileMenuItem);
 
         jMenuBar1.add(jMenu2);
@@ -281,7 +286,7 @@ public class SinkFrame extends javax.swing.JFrame {
                     labelBar3.setText(" Proximity = " + proximity);
 
                     // Saves report file
-                    if (saveFileMenuItem.isSelected()) {
+                    if (saveFileMenuItem.isSelected() && exportWorld != null) {
                         exportWorld.exportData(i, population, density, proximity);
                     }
 
@@ -303,7 +308,7 @@ public class SinkFrame extends javax.swing.JFrame {
 
     private void stopMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopMenuItemActionPerformed
         // Closes the report file
-        if (saveFileMenuItem.isSelected()) {
+        if (saveFileMenuItem.isSelected() && exportWorld != null) {
             exportWorld.closeFile();
         }
         // Removes the graphics
@@ -332,6 +337,20 @@ public class SinkFrame extends javax.swing.JFrame {
         new ExportXML(parameters);
         this.dispose();
     }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void saveFileMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileMenuItemActionPerformed
+        if (saveFileMenuItem.isSelected() && world != null) {
+            // Saves report file
+            if (this.saveFileMenuItem.isSelected()) {
+                exportWorld = new ExportCSV();
+                exportWorld.exportParameters(world.getParameters());
+            }
+        }else{
+            if(exportWorld != null){
+                exportWorld.closeFile();
+            }
+        }
+    }//GEN-LAST:event_saveFileMenuItemActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem StartMenuItem;
     private javax.swing.JPanel canvasPanel;
