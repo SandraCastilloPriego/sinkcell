@@ -27,19 +27,22 @@ import java.util.logging.Logger;
  */
 public class SinkFrame extends javax.swing.JFrame {
 
-    Parameters parameters;
-    Configuration config;
-    World world;
-    CanvasSink cSink;
-    sinkThread thread;
-    boolean stopSignal = false;
+    private Parameters parameters;
+    private Configuration config;
+    private World world;
+    private CanvasSink cSink;
+    private sinkThread thread;
+    private boolean stopSignal = false;
+    private ExportCSV exportWorld;
 
     /** Creates new form sinkFrame */
     public SinkFrame() {
         ImportXML importParameters = new ImportXML();
         parameters = importParameters.getParameters();
         config = new Configuration(parameters);
+
         initComponents();
+
     }
 
     /** This method is called from within the constructor to
@@ -67,6 +70,7 @@ public class SinkFrame extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         configuratioMenuItem = new javax.swing.JMenuItem();
+        saveFileMenuItem = new javax.swing.JCheckBoxMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -176,6 +180,9 @@ public class SinkFrame extends javax.swing.JFrame {
         });
         jMenu2.add(configuratioMenuItem);
 
+        saveFileMenuItem.setText("Export CSV file");
+        jMenu2.add(saveFileMenuItem);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Help");
@@ -208,17 +215,31 @@ public class SinkFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void configuratioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuratioMenuItemActionPerformed
-       config.setVisible(true);
+        config.setVisible(true);
     }//GEN-LAST:event_configuratioMenuItemActionPerformed
 
     private void StartMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartMenuItemActionPerformed
+
         stopSignal = false;
         canvasPanel.removeAll();
+
+        // Gets parameters from "configuration" dialog
         parameters = config.getParameters();
+
+        // Saves report file
+        if (this.saveFileMenuItem.isSelected()) {
+            exportWorld = new ExportCSV();
+            exportWorld.exportParameters(parameters);
+        }
+
         world = new World(parameters);
         world.init();
+
+        // Paints the world
         cSink = new CanvasSink(world, parameters);
         canvasPanel.add(cSink);
+
+        // Starts simulation
         thread = new sinkThread(cSink, parameters.cicles);
         thread.start();
         this.validate();
@@ -232,20 +253,30 @@ public class SinkFrame extends javax.swing.JFrame {
         @Override
         public void run() {
             for (int i = 0; i < parameters.cicles; i++) {
-                if(stopSignal){
+                // If there is an stop signal the simulation breaks the loop.
+                if (stopSignal) {
                     break;
                 }
                 if (!pauseMenuItem.isSelected()) {
+                    // Paint the graphics
                     cSink.update(cSink.getGraphics());
+
+                    // Writes some data in the bar
                     int population = world.getPopulation();
                     float density = world.getDensity();
-                    float proximity = world.getProximity(); 
-
+                    float proximity = world.getProximity();
 
                     labelBar.setText("Iteration n = " + i);
-                    labelBar1.setText( " Population = " + population);
+                    labelBar1.setText(" Population = " + population);
                     labelBar2.setText(" Density = " + density);
-                    labelBar3.setText(" Proximity = "+ proximity);
+                    labelBar3.setText(" Proximity = " + proximity);
+
+                    // Saves report file
+                    if (saveFileMenuItem.isSelected()) {
+                        exportWorld.exportData(i, population, density, proximity);
+                    }
+
+                    // Makes the simulation slowly
                     try {
                         sleep(300);
                     } catch (InterruptedException ex) {
@@ -262,7 +293,13 @@ public class SinkFrame extends javax.swing.JFrame {
     }
 
     private void stopMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopMenuItemActionPerformed
+        // Closes the report file
+        if (saveFileMenuItem.isSelected()) {
+            exportWorld.closeFile();
+        }
+        // Removes the graphics
         this.canvasPanel.removeAll();
+
         this.stopSignal = true;
         this.validate();
     }//GEN-LAST:event_stopMenuItemActionPerformed
@@ -273,15 +310,19 @@ public class SinkFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        About about = new About(this,false);
+        About about = new About(this, false);
         about.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        // Closes the report file
+        if (saveFileMenuItem.isSelected()) {
+            exportWorld.closeFile();
+        }
+        // Export the parameters file --> config.xml
         new ExportXML(parameters);
         this.dispose();
     }//GEN-LAST:event_exitMenuItemActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem StartMenuItem;
     private javax.swing.JPanel canvasPanel;
@@ -301,6 +342,7 @@ public class SinkFrame extends javax.swing.JFrame {
     private javax.swing.JLabel labelBar2;
     private javax.swing.JLabel labelBar3;
     private javax.swing.JCheckBoxMenuItem pauseMenuItem;
+    private javax.swing.JCheckBoxMenuItem saveFileMenuItem;
     private javax.swing.JMenuItem stopMenuItem;
     // End of variables declaration//GEN-END:variables
 }
