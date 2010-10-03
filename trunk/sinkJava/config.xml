@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+  <general_variables>
+    <cicles>38983</cicles>
+    <population>2331</population>
+    <mortality>1780</mortality>
+    <patch>89</patch>
+    <size>57</size>
+  </general_variables>
+  <internal_variables>
+    <var1>0</var1>
+    <var2>0</var2>
+    <var3>0</var3>
+    <var4>0</var4>
+  </internal_variables>
+</configuration>
