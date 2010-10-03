@@ -32,7 +32,6 @@ public class SinkFrame extends javax.swing.JFrame {
     private World world;
     private CanvasSink cSink;
     private sinkThread thread;
-    private boolean stopSignal = false;
     private ExportCSV exportWorld;
 
     /** Creates new form sinkFrame */
@@ -76,6 +75,7 @@ public class SinkFrame extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SinkCell");
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
@@ -234,13 +234,19 @@ public class SinkFrame extends javax.swing.JFrame {
 
     private void StartMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartMenuItemActionPerformed
 
-        stopSignal = false;
+        if (thread != null) {
+            this.thread.stopSignal = true;
+        }
         canvasPanel.removeAll();
 
         // Gets parameters from "configuration" dialog
         parameters = config.getParameters();
 
         // Saves report file
+        if (this.exportWorld != null) {
+            this.exportWorld.closeFile();
+        }
+
         if (this.saveFileMenuItem.isSelected()) {
             exportWorld = new ExportCSV();
             exportWorld.exportParameters(parameters);
@@ -261,11 +267,15 @@ public class SinkFrame extends javax.swing.JFrame {
 
     public class sinkThread extends Thread {
 
+        public boolean stopSignal;
+
         public sinkThread(CanvasSink sink, int cicles) {
+            stopSignal = false;
         }
 
         @Override
         public void run() {
+
             for (int i = 0; i < parameters.cicles; i++) {
                 // If there is an stop signal the simulation breaks the loop.
                 if (stopSignal) {
@@ -314,7 +324,9 @@ public class SinkFrame extends javax.swing.JFrame {
         // Removes the graphics
         this.canvasPanel.removeAll();
 
-        this.stopSignal = true;
+        if (thread != null) {
+            this.thread.stopSignal = true;
+        }
         this.validate();
     }//GEN-LAST:event_stopMenuItemActionPerformed
 
@@ -330,7 +342,7 @@ public class SinkFrame extends javax.swing.JFrame {
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         // Closes the report file
-        if (saveFileMenuItem.isSelected()) {
+        if (saveFileMenuItem.isSelected() && exportWorld != null) {
             exportWorld.closeFile();
         }
         // Export the parameters file --> config.xml
@@ -345,8 +357,8 @@ public class SinkFrame extends javax.swing.JFrame {
                 exportWorld = new ExportCSV();
                 exportWorld.exportParameters(world.getParameters());
             }
-        }else{
-            if(exportWorld != null){
+        } else {
+            if (exportWorld != null) {
                 exportWorld.closeFile();
             }
         }
