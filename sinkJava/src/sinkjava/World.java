@@ -75,8 +75,8 @@ public class World {
         Random oRand = new Random();
         //Init the "habitat" array
         for (int i = 0; i < this.patch; i++) {
-            x = (oRand.nextInt(this.x_axis - 1) + 1);
-            y = (oRand.nextInt(this.y_axis - 1) + 1);
+            x = oRand.nextInt(this.x_axis - 1);
+            y = oRand.nextInt(this.y_axis - 1);
 
             for (int j = y - 1; j < y + 2; j++) {
                 for (int e = x - 1; e < x + 2; e++) {
@@ -87,8 +87,8 @@ public class World {
 
         //Init the "population" array
         for (int i = 0; i < this.n_population; i++) {
-            x = (oRand.nextInt(this.x_axis - 1) + 1);
-            y = (oRand.nextInt(this.y_axis - 1) + 1);
+            x = oRand.nextInt(this.x_axis - 1);
+            y = oRand.nextInt(this.y_axis - 1);
             this.cellsState[x][y] = 1;
         }
 
