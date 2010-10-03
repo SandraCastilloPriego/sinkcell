@@ -54,21 +54,24 @@ public class CanvasSink extends Canvas {
 
             int size = parameters.size;
 
-            for (int x = 0; x < size - 1; x++) {
-                for (int y = 0; y < size - 1; y++) {
-                    int n_x = ((this.canvasSize * x) / size);
-                    int n_y = ((this.canvasSize * y) / size);
-                  //  System.out.println(x + " - " + y);
+            double cellSize = this.canvasSize/size;
+
+            for (int x = 0; x < size ; x++) {
+                for (int y = 0; y < size ; y++) {
+                    int n_x = (int)(x * canvasSize)/size;
+                    int n_y = (int)(y * canvasSize)/size;
+                  
                     if (habitat[x][y] == 1) {
-                        offgc.setColor(Color.black);
-                        offgc.drawRect(n_x, n_y, (this.canvasSize / size) - 2, (this.canvasSize / size) - 2);
+                        
                         offgc.setColor(Color.GREEN);
-                        offgc.fillRect(n_x, n_y, this.canvasSize / size, this.canvasSize / size);
+                        offgc.fillRect(n_x, n_y, (int)cellSize, (int)cellSize);
+                        offgc.setColor(Color.black);
+                        offgc.drawRect(n_x, n_y, (int)cellSize, (int)cellSize);
                     }
 
                     if (population[x][y] == 1) {
                         offgc.setColor(Color.red);
-                        offgc.fillRect(n_x, n_y, (this.canvasSize / size) - 1, (this.canvasSize / size) - 1);
+                        offgc.fillRect(n_x, n_y, ((int)cellSize) - 1, ((int)cellSize) - 1);
                     }
                 }
             }           
