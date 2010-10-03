@@ -117,15 +117,17 @@ public class SinkFrame extends javax.swing.JFrame {
         );
         canvasPanelLayout.setVerticalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 798, Short.MAX_VALUE)
+            .addGap(0, 797, Short.MAX_VALUE)
         );
 
         jPanel1.add(canvasPanel);
 
         getContentPane().add(jPanel1);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/knewstuff.png"))); // NOI18N
         jMenu1.setText("Simulation");
 
+        StartMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/launch.png"))); // NOI18N
         StartMenuItem.setMnemonic('S');
         StartMenuItem.setText("Start Simulation");
         StartMenuItem.setToolTipText(" Starts the cellular automaton simulation");
@@ -141,6 +143,7 @@ public class SinkFrame extends javax.swing.JFrame {
         pauseMenuItem.setToolTipText("Pause simulation.");
         jMenu1.add(pauseMenuItem);
 
+        stopMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/no.png"))); // NOI18N
         stopMenuItem.setMnemonic('O');
         stopMenuItem.setText("Stop Simulation");
         stopMenuItem.setToolTipText("Stops simulation.");
@@ -154,6 +157,7 @@ public class SinkFrame extends javax.swing.JFrame {
         jSeparator1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jMenu1.add(jSeparator1);
 
+        exitMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit.png"))); // NOI18N
         exitMenuItem.setMnemonic('E');
         exitMenuItem.setText("Exit");
         exitMenuItem.setToolTipText("Close aplication");
@@ -166,10 +170,12 @@ public class SinkFrame extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configure.png"))); // NOI18N
         jMenu2.setMnemonic('P');
         jMenu2.setText("Configuration");
         jMenu2.setToolTipText("Sets the simulation parameters");
 
+        configuratioMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configure.png"))); // NOI18N
         configuratioMenuItem.setMnemonic('S');
         configuratioMenuItem.setText("Set Parameters");
         configuratioMenuItem.setToolTipText("Form to set the simulation parameters");
@@ -185,8 +191,10 @@ public class SinkFrame extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/help.png"))); // NOI18N
         jMenu3.setText("Help");
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/help.png"))); // NOI18N
         jMenuItem2.setMnemonic('H');
         jMenuItem2.setText("Help");
         jMenuItem2.setToolTipText("Sink help");
@@ -197,6 +205,7 @@ public class SinkFrame extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/info.png"))); // NOI18N
         jMenuItem3.setMnemonic('A');
         jMenuItem3.setText("About us");
         jMenuItem3.setToolTipText("About us");
